@@ -1,0 +1,5 @@
+[credential]
+        helper = store --file ~/.git-credentials
+[user]
+        name = Daniel Moses
+        email = <<email_address>>
