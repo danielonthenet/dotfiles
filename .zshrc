@@ -2,7 +2,7 @@ DEFAULT_USER=$USER
 
 export TERM="xterm-256color"
 
-source ~/.antigen/antigen.zsh
+source /usr/local/share/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -50,38 +50,12 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 # Tell antigen that you're done.
 antigen apply
 
-##### START Fix for ssh-agent {
-# Ref: http://mah.everybody.org/docs/ssh
-
-SSH_ENV="$HOME/.ssh/environment"
-
-function start_agent {
-     echo "Initialising new SSH agent..."
-     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-     echo succeeded
-     chmod 600 "${SSH_ENV}"
-     . "${SSH_ENV}" > /dev/null
-     /usr/bin/ssh-add;
-}
-
-# Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-     . "${SSH_ENV}" > /dev/null
-     #ps ${SSH_AGENT_PID} doesn't work under cywgin
-     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-     }
-else
-     start_agent;
-fi
-##### } END Fix for ssh-agent
-
 # golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # autojump
-. /usr/share/autojump/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -92,8 +66,8 @@ export PATH=$PATH:$GOPATH/bin
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias k="kubectl"
-alias kubectx="kubectl ctx"
-alias kubens="kubectl ns"
+alias myip="curl https://ipecho.net/plain; echo"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

@@ -2,4 +2,6 @@
         helper = store --file ~/.git-credentials
 [user]
         name = Daniel Moses
-        email = <<email_address>>
+        email = danielonthenet@gmail.com
+[core]
+	excludesfile = /Users/daniel.moses/.gitignore
