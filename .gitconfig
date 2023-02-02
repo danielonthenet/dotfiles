@@ -1,7 +1,17 @@
+# Setting this up with ~/.ssh/config ensures both method of cloning works (HTTPS / SSH)
+
 [credential]
         helper = store --file ~/.git-credentials
 [user]
         name = Daniel Moses
-        email = danielonthenet@gmail.com
+        email = daniel.moses@viki.com
 [core]
 	excludesfile = /Users/daniel.moses/.gitignore
+
+
+
+# # Enforce SSH
+# [url "ssh://git@github.com/"]
+#   insteadOf = https://github.com/
+[http]
+	sslVerify = false
